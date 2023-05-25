@@ -1,0 +1,40 @@
+{% include 'nav-bar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grooming</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+</head>
+<body>
+<header class="bg-primary text-white text-center py-5">
+    <h1>Welcome to Grooming!</h1>
+    <p class="lead">We provide top-notch grooming services for your pets.</p>
+    <a href="#" class="btn btn-light btn-lg">Book an Appointment</a>
+</header>
+
+<section class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% static 'images/grooming-image.jpg' %}" alt="Grooming" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac est a elit finibus placerat.
+                Integer pretium magna non turpis lobortis, ac congue elit interdum. Etiam in dui non tortor egestas
+                iaculis ac ac turpis.</p>
+            <p>Nunc vel eros vehicula, tincidunt ligula et, consectetur lectus. Sed in pulvinar diam. Integer sit amet
+                cursus sem, vel ullamcorper tellus.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-light text-center py-3">
+    <p>&copy; 2023 Grooming. All rights reserved.</p>
+</footer>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
