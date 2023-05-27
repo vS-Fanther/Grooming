@@ -20,7 +20,7 @@ class Service(models.Model):
 
 
 class User(models.Model):
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20)
     breed = models.CharField(max_length=100)

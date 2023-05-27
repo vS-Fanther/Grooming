@@ -5,8 +5,8 @@
                 <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="{% url 'sign_up' %}" method="POST">
+            <form action="{% url 'sign_up' %}" method="POST">
+                <div class="modal-body">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="email">Email</label>
@@ -14,11 +14,14 @@
                     </div>
                     <div class="mb-3">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="Enter your password">
                     </div>
+                </div>
+                <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Sign Up</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
