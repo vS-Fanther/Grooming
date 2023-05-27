@@ -1,4 +1,7 @@
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
+from project.models import User
 
 
 # Create your views here.
@@ -16,12 +19,7 @@ def contact(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        password = request.POST.get('password')
-        print(email, password)
-        # todo implementation
+        register_user(request)
 
         return redirect('index')
 
@@ -29,16 +27,7 @@ def sign_up(request):
 
 
 def sign_in(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        name = request.POST.get('name')
-        password = request.POST.get('password')
-        print(email, password)
-        # todo implementation
-
-        return redirect('index')
-
-    return render(request, 'sign-in.html')
+    auth_user(request)
 
 
 def add_service(request):
@@ -49,7 +38,7 @@ def add_service(request):
 
         return redirect('index')
 
-    return render(request, 'sign-in.html')
+    return render(request, 'add-service.html')
 
 
 def contact_us(request):
@@ -63,3 +52,36 @@ def contact_us(request):
         return redirect('contact')
 
     return render(request, 'sign-in.html')
+
+
+def register_user(request):
+    email = request.POST.get('email')
+    exists = User.objects.filter(email=email).exists()
+    if exists:
+        render(request, 'sign-up.html')
+
+    user = User(
+        name=request.POST.get('name'),
+        email=request.POST.get('email'),
+        password=make_password(request.POST.get('password')),
+        phone_number=request.POST.get('phone'),
+        age=request.POST.get('age'),
+        breed=request.POST.get('breed'),
+    )
+    user.is_admin = False
+    print(user)
+    user.save()
+
+
+def auth_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return redirect('sign_in')
+    else:
+        return render(request, 'sign-in.html')

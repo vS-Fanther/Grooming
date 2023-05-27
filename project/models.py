@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -19,17 +20,14 @@ class Service(models.Model):
         return self.name
 
 
-class User(models.Model):
-    email = models.EmailField(unique=True)
-    name = models.CharField(max_length=255)
+class User(AbstractUser):
     phone_number = models.CharField(max_length=20)
     breed = models.CharField(max_length=100)
     age = models.IntegerField()
-    password = models.CharField(max_length=255)
-    is_admin = models.BooleanField
 
     def __str__(self):
-        return f"Pet: {self.name}, Breed: {self.breed}"
+        return f"Email: {self.email}, Name: {self.first_name}, Phone Number: {self.phone_number}, Breed: {self.breed}, " \
+               f"Age: {self.age}, Password: {self.password}"
 
 
 class ContactMessage(models.Model):
