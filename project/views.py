@@ -1,8 +1,8 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
-from project.models import User
+from project.models import User, ContactMessage
 
 
 # Create your views here.
@@ -31,18 +31,16 @@ def sign_in(request):
     if request.method == 'POST':
         auth_user(request)
 
-        return redirect('index')
-
-    return render(request, 'sign-in.html')
-
 
 def contact_us(request):
     if request.method == 'POST':
-        message = request.POST.get('message')
-        email = request.POST.get('email')
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        print(name, email, message, phone)
+        contact_message = ContactMessage(
+            message=request.POST.get('message'),
+            email=request.POST.get('email'),
+            first_name=request.POST.get('name'),
+            phone=request.POST.get('phone'),
+        )
+        print(contact_message)
 
         return redirect('contact')
 
@@ -75,6 +73,7 @@ def auth_user(request):
             login(request, user)
             return redirect('index')
         else:
+            # todo починить это гавно as Raise error
             return redirect('sign_in')
     else:
         return render(request, 'sign-in.html')
@@ -102,3 +101,10 @@ def edit_profile(request):
         return redirect('profile')  # Редирект на страницу профиля после сохранения изменений
 
     return render(request, 'profile.html')
+
+
+@login_required
+def leave_account(request):
+    logout(request)
+
+    return redirect('index')
