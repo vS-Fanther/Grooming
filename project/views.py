@@ -108,3 +108,9 @@ def leave_account(request):
     logout(request)
 
     return redirect('index')
+
+
+def book_appointment(request):
+    if request.method == 'POST':
+        date = request.POST.get('date')
+        # todo implementation

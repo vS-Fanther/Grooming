@@ -1,4 +1,5 @@
 {% include 'nav-bar.html' %}
+{% include 'booking.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,9 @@
 <header class="bg-primary text-white text-center py-5">
     <h1>Welcome to Grooming!</h1>
     <p class="lead">We provide top-notch grooming services for your pets.</p>
-    <a href="#" class="btn btn-light btn-lg">Book an Appointment</a>
+    <button type="button" class="btn btn-light" data-toggle="modal"
+            data-target="#bookAppointmentModal">Book an Appointment
+    </button>
 </header>
 
 <section class="container my-5">
