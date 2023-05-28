@@ -31,6 +31,10 @@ def sign_in(request):
     if request.method == 'POST':
         auth_user(request)
 
+        return redirect('index')
+
+    return render(request, 'sign-in.html')
+
 
 def contact_us(request):
     if request.method == 'POST':
