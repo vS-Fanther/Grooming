@@ -1,17 +1,49 @@
 {% include 'nav-bar.html' %}
-{% include 'add-service.html' %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
 </head>
+<body>
 <header class="bg-primary text-white text-center py-5">
-    <h1>Services And Prices</h1>
+    <h1>Services</h1>
     <p class="lead">Feel free to get in touch with us.</p>
-    <button type="button" class="btn btn-light" data-toggle="modal"
-                            data-target="#addServiceModal">Create Service</button>
 </header>
-
-
+<section class="container my-5">
+    <h2>Our Services</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Service</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Haircut</td>
+            <td>Transform your dog's appearance with a stylish and professional haircut.</td>
+        </tr>
+        <tr>
+            <td>Bathing and Basic Hygiene</td>
+            <td>Keep your dog clean and fresh with a thorough bath and hygiene services.</td>
+        </tr>
+        <tr>
+            <td>Hair and Skin Care</td>
+            <td>Pamper your dog's hair and skin with our specialized care products and treatments.</td>
+        </tr>
+        <tr>
+            <td>Styling and Accessories</td>
+            <td>Add some flair to your dog's look with stylish grooming and accessories.</td>
+        </tr>
+        <tr>
+            <td>Massage and Spa Treatments</td>
+            <td>Spoil your dog with relaxing massages and luxurious spa treatments.</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-muted">*Price varies based on breed</p>
+</section>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect
 from project.models import User
@@ -27,18 +28,12 @@ def sign_up(request):
 
 
 def sign_in(request):
-    auth_user(request)
-
-
-def add_service(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        price = request.POST.get('price')
-        print(name, price)
+        auth_user(request)
 
         return redirect('index')
 
-    return render(request, 'add-service.html')
+    return render(request, 'sign-in.html')
 
 
 def contact_us(request):
@@ -61,12 +56,10 @@ def register_user(request):
         render(request, 'sign-up.html')
 
     user = User(
-        name=request.POST.get('name'),
+        username=request.POST.get('username'),
+        first_name=request.POST.get('first_name'),
         email=request.POST.get('email'),
-        password=make_password(request.POST.get('password')),
-        phone_number=request.POST.get('phone'),
-        age=request.POST.get('age'),
-        breed=request.POST.get('breed'),
+        password=make_password(request.POST.get('password'))
     )
     user.is_admin = False
     print(user)
@@ -85,3 +78,27 @@ def auth_user(request):
             return redirect('sign_in')
     else:
         return render(request, 'sign-in.html')
+
+
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'profile.html', {'user': user})
+
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        breed = request.POST.get('breed')
+        age = request.POST.get('age')
+        phone = request.POST.get('phone')
+
+        user = request.user
+        user.breed = breed
+        user.age = age
+        user.phone_number = phone
+        user.save()
+
+        return redirect('profile')  # Редирект на страницу профиля после сохранения изменений
+
+    return render(request, 'profile.html')
